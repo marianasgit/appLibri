@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Text, View, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import {Text, View, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
 
 import COLORS from '../const/colors';
 
@@ -18,19 +18,26 @@ const Cadastro = () => {
 
   //FUNCAO QUE MANIPULA A ENTRADA DE DADOS NA STATE NO METODO ONCHANGETEXT
   const handlerOnChange = (text, input) => {
+    setInputs(
+      prevState => (
+        //console.log(prevState)
+        //console.log(input + ' ' + text)
 
-    setInputs((prevState)=>{
-      //console.log(prevState)
-      //console.log(input + ' ' + text)
-
-      //injecao de dados na state
-      console.log({...prevState, [input] : text})
-      return {...prevState, [input] : text};
-      
-    });
-  }
+        //injecao de dados na state
+        console.log(prevState), {...prevState, [input]: text}
+      ),
+    );
+  };
 
   /** VALIDACAO DOS DADOS DE CADASTRO **/
+
+  //STATE DE ERRO DE PREENCHIMENTO
+  const [errors, setErrors] = React.useState({});
+
+  //FUNÇÀO HANDLER QUE CONFIGURA AS MENSAGENS DE ERRO NA STATE
+  const handlerErrors = (errorMessage, input) => {
+    setErrors(prevSate => ({...prevSate, [input]: errorMessage}));
+  };
 
   //FUNCAO DE VALIDACAO
   const validate = () => {
@@ -38,31 +45,47 @@ const Cadastro = () => {
 
     if (!inputs.titulo) {
       validate = false;
-      console.log('Titulo em branco');
+      handlerErrors('Informe o título do livro', 'titulo');
+      // console.log('Titulo em branco');
     }
     if (!inputs.descricao) {
       validate = false;
-      console.log('Descrição em branco');
+      handlerErrors('Informe a descrição do livro', 'descricao');
+      // console.log('Descrição em branco');
     }
     if (!inputs.capa) {
       validate = false;
-      console.log('Capa em branco');
+      handlerErrors('Informe a capa do livro', 'capa');
+      //console.log('Capa em branco', 'titulo');
     }
-  }
+    console.log(errors);
+  };
 
   return (
-    <SafeAreaView style={estilos.safe} >
+    <SafeAreaView style={estilos.safe}>
       <ScrollView style={estilos.scroll}>
-
         <Text style={estilos.textTitle}>CADASTRO DE LIVROS</Text>
 
         <View style={estilos.viewForm}>
-
-          <Input label="TITULO" onChangeText={(text) => handlerOnChange(text, 'titulo')}/>
-          <Input label="DESCRIÇÃO" onChangeText={(text) => handlerOnChange(text, 'descricao')}/>
-          <Input label="CAPA" onChangeText={(text) => handlerOnChange(text, 'capa')}/>
+          <Input
+            label="TITULO"
+            error={errors.titulo}
+            onFocus={() => {handlerErrors(null, 'titulo')}}
+            onChangeText={text => handlerOnChange(text, 'titulo')}
+          />
+          <Input
+            label="DESCRIÇÃO"
+            error={errors.descricao}
+            onFocus={() => {handlerErrors(null, 'descricao')}}
+            onChangeText={text => handlerOnChange(text, 'descricao')}
+          />
+          <Input
+            label="CAPA"
+            error={errors.capa}
+            onFocus={() => {handlerErrors(null, 'capa')}}
+            onChangeText={text => handlerOnChange(text, 'capa')}
+          />
           <Button title="CADASTRAR" onPress={validate} />
-
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -70,7 +93,6 @@ const Cadastro = () => {
 };
 
 const estilos = StyleSheet.create({
-
   safe: {
     flex: 1,
     backgroundColor: COLORS.white,
@@ -89,9 +111,7 @@ const estilos = StyleSheet.create({
 
   viewForm: {
     marginVertical: 20,
-
   },
-
 });
 
 export default Cadastro;
