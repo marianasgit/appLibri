@@ -5,6 +5,7 @@ import COLORS from '../const/colors';
 
 import Input from '../components/input';
 import Button from '../components/button';
+import apiLivraria from '../service/apiLivraria';
 
 const Cadastro = () => {
   //const nome = 'Tela de Cadastro';
@@ -26,7 +27,7 @@ const Cadastro = () => {
         //injecao de dados na state
         console.log(prevState), {...prevState, [input]: text}
       ),
-    );s
+    );
   };
 
   /** VALIDACAO DOS DADOS DE CADASTRO **/
@@ -58,9 +59,30 @@ const Cadastro = () => {
       handlerErrors('Informe a capa do livro', 'capa');
       //console.log('Capa em branco', 'titulo');
     }
-    console.log(errors);
-  };
 
+    if (validate) {
+      // ENVIAR OS DAOS PARA A API CADASTRAR
+      cadastrar();
+      console.log('Cadastrado!');
+    }
+
+    console.log(errors);
+
+    
+  };
+  
+  const cadastrar = () => {
+    try{
+      const response = apiLivraria.post('/cadastrarLivros', 
+      {
+        titulo: inputs.titulo,
+        descricao: inputs.descricao,
+        imagem: inputs.capa
+      })
+
+    } catch(error){}
+  }
+  
   return (
     <SafeAreaView style={estilos.safe}>
       <ScrollView style={estilos.scroll}>
