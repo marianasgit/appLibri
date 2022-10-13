@@ -42,11 +42,11 @@ const Detalhes = () => {
 
         <View style={estilos.botoes}>
           <TouchableOpacity style={estilos.botao} onPress={() => {}}>
-            <Text style={estilos.textoBotao}>EDITAR</Text>
+            <Text style={[estilos.textoBotao, {backgroundColor: COLORS.darkBlue}]}>EDITAR</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={estilos.botao} onPress={() => {}}>
-            <Text style={estilos.textoBotao}>EXCLUIR</Text>
+            <Text style={[estilos.textoBotao, {backgroundColor: COLORS.red}]}>EXCLUIR</Text>
           </TouchableOpacity>
         </View>
 
