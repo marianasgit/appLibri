@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View, StyleSheet, SafeAreaView, ScrollView, Image} from 'react-native';
+import {Text, View, StyleSheet, SafeAreaView, ScrollView, Image, TouchableOpacity} from 'react-native';
 
 import COLORS from '../const/colors';
 import apiLivraria from '../service/apiLivraria';
@@ -14,6 +14,7 @@ const Listagem = () => {
             apiLivraria.get('/listarLivros')
             .then((data) => {
                 console.log(data);
+                setLivros(data.data)
             })
         }, 
         []
@@ -23,10 +24,19 @@ const Listagem = () => {
         <ScrollView>
 
             <View style={estilos.container}>
-                <View style={estilos.post}>
-                    <Image style={estilos.imagem} source={capaLivro150} />
-                    <Text style={estilos.titulo}>O senhor dos anéis</Text>
-                </View>
+                {
+                    livros.map(
+                        livro => (
+                            <TouchableOpacity key={livro.cod_livro} style={estilos.post} onPress={() => {}}>
+                                <View>
+                                    <Image style={estilos.imagem} source={capaLivro150} />
+                                    <Text style={estilos.titulo}>{livro.titulo}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        )
+                    )
+                }
+                
             </View>
 
         </ScrollView>
@@ -36,7 +46,7 @@ const Listagem = () => {
 const estilos = StyleSheet.create({
 
     container: {
-        alignItems: 'center'
+        alignItems: 'center',
     },
     post: {
         width: '95%' ,

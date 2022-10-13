@@ -1,38 +1,34 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 
-// import Login from "./src/telas/Login";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+const Stack = createNativeStackNavigator();
+
 import Cadastro from "./src/telas/Cadastro";
 import Listagem from "./src/telas/Listagem";
+import Detalhes from "./src/telas/Detalhes";
 
 const App = () => {
 
-  //const nome = 'SENAI - JANDIRA';
-
   return (
-    // <View>
-    //    <Text style = {estilo.titulo}>{nome}</Text>
-    // </View>  
-    // <Login />  
-    //<Cadastro />
-    <Listagem />
+    // <NavigationContainer>
+
+    //   <Stack.Navigator screenOptions={false}>
+
+    //     <Stack.Screen name="Cadastro" component={Cadastro} options={{title: 'CADASTRO DE LIVROS'}} />
+
+    //     <Stack.Screen name="Listagem" component={Listagem} options={{title: 'LISTAGEM DE LIVROS'}} />
+
+    //   </Stack.Navigator>
+
+    // </NavigationContainer>
+
+    // <Listagem />
+
+    <Detalhes />
   );
 }
-
-const estilo = StyleSheet.create({
-
-  container: {},
-
-  titulo: {
-    width: "100%",
-    backgroundColor: "#f00",
-    textAlign: "center",
-    fontSize: 16,
-    lineHeight: 26,
-    color: "#fff",
-    fontWeight: "bold",
-    padding: 16,
-  },
-});
 
 export default App;
