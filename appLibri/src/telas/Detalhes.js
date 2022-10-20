@@ -42,11 +42,11 @@ const Detalhes = () => {
 
         <View style={estilos.botoes}>
           <TouchableOpacity style={estilos.botao} onPress={() => {}}>
-            <Text style={[estilos.textoBotao, {backgroundColor: COLORS.darkBlue}]}>EDITAR</Text>
+            <Text style={[estilos.textoBotao, {backgroundColor: COLORS.darkBlue, color: COLORS.white}]}>EDITAR</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={estilos.botao} onPress={() => {}}>
-            <Text style={[estilos.textoBotao, {backgroundColor: COLORS.red}]}>EXCLUIR</Text>
+            <Text style={[estilos.textoBotao, {backgroundColor: COLORS.red, color: COLORS.white}]}>EXCLUIR</Text>
           </TouchableOpacity>
         </View>
 
@@ -57,6 +57,11 @@ const Detalhes = () => {
 };
 
 const estilos = StyleSheet.create({
+
+  page: {
+    justifyContent: 'center'
+  },
+
   container: {
     alignItems: 'center',
   },
@@ -64,7 +69,7 @@ const estilos = StyleSheet.create({
   post: {
     width: '95%',
     alignItems: 'center',
-    backgroundColor: '#CCC',
+    backgroundColor: '#ccc',
     padding: 15,
     marginVertical: 5,
     borderRadius: 5,
@@ -98,7 +103,7 @@ const estilos = StyleSheet.create({
 
   botao: {
     width: '50%',
-    marginHorizontal: 10,
+    marginHorizontal: 1,
   },
 
   textoBotao: {
